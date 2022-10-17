@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Search Results{% endblock %}
+{% block body %}
+
+
+<div class="container">
+
+    <h1>
+        Search results for subreddit: r/{{response["data"][0]["subreddit"]}} between dates: {{response["start_date"]}} - {{response["end_date"]}}:
+    </h1>
+
+
+    {% for i in range(response["data"]|length) %}
+        <div class="subredditPostDetails" link="#">
+            <a href={{ response["data"][i]["full_link"] }} target="_blank">
+                <div class="row border border-dark mb-3">
+                    <div class="col-1">
+                        {{i+1}}
+                    </div>
+                    <div class="col-2">
+                        <div class="row"> <i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+                        <div class="row">Score: {{ response["data"][i]["score"] }}</div>
+                        <div class="row"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="col-2">
+
+                        {% if response["data"][i]["thumbnail"].startswith("http")  %}
+                            <img class="mt-1 mb-1" src={{ response["data"][i]["thumbnail"] }} class="img-thumbnail" alt="Image has been deleted" {% if response["data"][i]["over_18"] %} style="filter:blur(5px)" {% endif %}> 
+                        {% else %}    
+                            <i class="fa fa-camera-retro fa-4x"></i>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-7">
+                        <div class="row"><h5>{{response["data"][i]["title"] if response["data"][i]["title"]|length < 150 else response["data"][i]["title"][:150] + "..."}}</h5></div>
+                        <div class="row"><h8>Author: {{ response["data"][i]["author"] }}</h8></div>
+                        <div class="row"><h8>{{ response["data"][i]["num_comments"] }} Comments</h8></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+
+
+    <button type="button" class="btn btn-primary float-end">Next List</button>
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,3 @@
+to create use: > python -m venv <environment_name>
+to activate use: > project_env\Scripts\activate.bat
+to deactivate use: > deactivate

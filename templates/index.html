@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block body %}
+
+
+<div class="container mb-3">
+    <!-- Content here -->
+    <h1 class="mb-4 mt-5">Search a subreddit between a specified date range:</h1>
+
+    <form action="#" method="post">
+
+        <div class="mb-3">
+            <label for="subredditName" class="form-label">Enter the subreddit name you want to search (exclude
+                the"r/"): </label>
+
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">r/</span>
+                <input class="form-control" list="subredditNameOptions" id="subredditName"
+                    placeholder="Enter Subreddit name..." name="SubredditName" autocomplete="off" required>
+                <datalist id="subredditNameOptions">
+
+                </datalist>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="useMovieDBHelper" onclick="showTVShowHelper()">
+            <label class="form-check-label" for="useMovieDBHelper">
+                Use the TV Show helper?
+            </label>
+        </div>
+
+        <div class="mb-3" id="TVShowHelper" style="display: none;">
+
+            <label for="TVShowName" class="form-label">Enter the name of the TV show you are looking for to get
+                a list of episodes</label>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Series Title" aria-label="Series Title" aria-describedby="series-title-search" id="seriesTitle">
+                <button class="btn btn-secondary" type="button" id="series-title-search" onclick="TVShowSearch()"><i class="fa fa-search"></i> Search for Series Info</button>
+            </div>
+
+            <p id="seriesSearchLoading" style="display: none;">Loading Series Search results... <i class="fa fa-spinner fa-spin fa-3x"></i></p>
+
+            <div id="seriesSearchResult" style="display: none;">
+                <label for="seriesSearchResult" class="form-label">Please choose the Series you were searching for from the list below:</label>
+                <ul class="list-group" id="seriesSearchResultList">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                </ul>
+            </div>
+
+            <div id="episodeSearchResult" class="mb-3">
+            </div>
+
+        </div>
+
+        <div class='row mb-3'>
+            <label class="form-label mt-3">Enter or Drag the date(s) you would like to see posts from and to: </label>
+            <div class='col-sm-6'>
+                <label for='linkedPickers1Input' class='form-label'>From</label>
+                <div class='input-group log-event' id='linkedPickers1' data-td-target-input='nearest'
+                    data-td-target-toggle='nearest'>
+                    <input id='linkedPickers1Input' type='text' class='form-control' data-td-target='#linkedPickers1'
+                        name="date1" ondrop="drop(event)" ondragover="allowDrop(event)"/>
+                    <span class='input-group-text' data-td-target='#linkedPickers1' data-td-toggle='datetimepicker'>
+                        <span class= 'fa fa-calendar'></span>
+                    </span>
+                </div>
+            </div>
+            <div class='col-sm-6'>
+                <label for='linkedPickers2Input' class='form-label'>To</label>
+                <div class='input-group log-event' id='linkedPickers2' data-td-target-input='nearest'
+                    data-td-target-toggle='nearest'>
+                    <input id='linkedPickers2Input' type='text' class='form-control' data-td-target='#linkedPickers2'
+                        name="date2" ondrop="drop(event)" ondragover="allowDrop(event)"/>
+                    <span class='input-group-text' data-td-target='#linkedPickers2' data-td-toggle='datetimepicker'>
+                        <span class='fa fa-calendar'></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<!--index page scripts for datepicker, togglehelper and series search 
+
+<script src="{{url_for('static', filename='datepicker_code.js')}}"></script>
+<script src="{{url_for('static', filename='toggle_helper.js')}}"></script>
+<script src="{{url_for('static', filename='drag_drop_functionality.js')}}"></script>
+-->
+<script src="{{url_for('static', filename='series_search.js')}}"></script>
+
+{% endblock %}
