@@ -74,6 +74,11 @@ def index():
         return render_template("search_result.html", response = url_response)
 
 
+@app.route("/data")
+def data():
+    return render_template("data.html")
+
+
 @app.route("/searchResult")
 def search_result():
 
